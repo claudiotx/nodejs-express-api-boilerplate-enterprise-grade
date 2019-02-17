@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "optimize-api",
+      "script": "dist/app.js",
+      "instances" : "2",
+      "exec_mode" : "cluster",
+      "max_restarts": 4,
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      },
+      "env_staging": {
+        "NODE_ENV": "staging",
+        "TEST": true
+      }
+    }
+  ]
+}

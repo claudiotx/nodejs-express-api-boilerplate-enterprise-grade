@@ -1,0 +1,1 @@
+{"version":3,"file":"safe-await.js","sourceRoot":"","sources":["../../src/lib/safe-await.ts"],"names":[],"mappings":";;AAAA,SAAwB,SAAS,CAAC,OAAqB;IACrD,OAAO,OAAO,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE;QACvB,OAAO,CAAC,SAAS,EAAE,IAAI,CAAC,CAAC;IAC7B,CAAC,CAAC;SACD,KAAK,CAAC,GAAG,CAAC,EAAE,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC;AACvB,CAAC;AALD,4BAKC"}
