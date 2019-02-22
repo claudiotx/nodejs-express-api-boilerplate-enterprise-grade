@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { RouteHandler, Get, Post, Put, Delete } from '../decorators/route-handler';
-import logService from '../classes/log-service';
+import logService from '../services/log-service';
 import Server from '../classes/server';
 import * as moment from 'moment';
 import * as os from 'os';

@@ -1,13 +1,27 @@
 # Enterprise Grade Node.js Boilerplate
-The main purpose of this repository is to provide a solid boilerplate base project to startups that which to have a quality and solid backend in Node.js (no views, no static, no end to end).
+The main purpose of this repository is to provide a solid boilerplate base project to startups that which to have a quality and solid API backend in Node.js (without views).
 It assumes an explicit separation between frontend and backend.
 I try my best to keep the repository uo to date.
 Community contributions are most welcome.
 
-# Getting started
-The build orchestration is managed by npm scripts, so there is no need for gulp or grunt orchestrators.
+## Main Features
+* TypeScript
+* CORS Middleware
+* Properly Handled Promises
+* Liveness Probe Endpoint
+* Safe Termination
+* Local and Remote Logging
+* Standard HTTP Security
+* OAS Compliant
+* Unit and E2E Tests
+* Self Documented
+* Ready to Use Decorators
+* API Automated Swager Documentation via TSOA (relies on TypeScript type annotations to generate API metadata)
+* TSLint Enabled
+* Safe Await Async Protection
 
-## Requirements
+## Getting started
+The build orchestration is managed by npm scripts, so there is no need for gulp or grunt orchestrators.
 Node.js >= 10
 
 - Clone the repository
@@ -60,6 +74,10 @@ A simple `d.ts` file:
 ```ts
 declare module "<some-library>";
 ```
+
+#### Typescript variable scopes
+- `protected` properties will be accessible from deriving classes
+- `private` properties are scoped to the class only
 
 ### Debugging
 Debugging TypeScript is exactly like debugging JavaScript with one caveat, you need source maps.

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import logService from '../classes/log-service';
+import logService from '../services/log-service';
 class IndexRoute {
   public router: Router;
 

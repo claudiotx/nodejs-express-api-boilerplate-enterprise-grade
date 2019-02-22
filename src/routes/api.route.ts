@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { RouteHandler, Get, Post, Put, Delete } from '../decorators/route-handler';
 import DocsService from '../services/docs-service';
 import Server from '../classes/server';
-import FeedDoc from '../models/feed.doc';
+import SampleDoc from '../models/sample.doc';
 import logService from '../services/log-service';
 @RouteHandler('/api')
 
