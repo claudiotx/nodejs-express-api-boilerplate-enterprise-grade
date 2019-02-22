@@ -9,7 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const log_service_1 = __importDefault(require("../services/log-service"));
+const log_1 = __importDefault(require("../services/log"));
 class Server {
     constructor(port = 4400) {
         this.routes = [];
@@ -34,14 +34,14 @@ class Server {
                 const whitelist = [
                     'kube-probe/1.10'
                 ];
-                log_service_1.default.log(`Origin check ${origin}`);
+                log_1.default.log(`Origin check ${origin}`);
                 if (whitelist.indexOf(origin) === -1) {
                     callback(undefined, true);
                 }
                 else {
                     callback(undefined, true);
-                    log_service_1.default.log(`Not allowed by CORS ${origin}`);
-                    log_service_1.default.log(`Not allowed by CORS ${origin}`);
+                    log_1.default.log(`Not allowed by CORS ${origin}`);
+                    log_1.default.log(`Not allowed by CORS ${origin}`);
                     // callback(new Error(`Not allowed by CORS ${origin}`));
                 }
             },
@@ -61,7 +61,7 @@ class Server {
     }
     safeTermination() {
         mongoose_1.default.disconnect().then(() => {
-            log_service_1.default.log('MongoDB safely shutting down interface...');
+            log_1.default.log('MongoDB safely shutting down interface...');
             process.exit(1);
         });
     }
@@ -82,10 +82,10 @@ class Server {
         const connectionOpts = {};
         this.db = mongoose_1.default.createConnection(process.env.MONGODB_URI, connectionOpts);
         this.db.once('open', () => {
-            log_service_1.default.log('Database connection is open.');
+            log_1.default.log('Database connection is open.');
         });
         this.db.on('error', (err) => {
-            log_service_1.default.log('Database connection error.', err);
+            log_1.default.log('Database connection error.', err);
             if (err)
                 throw err;
             process.exit(1);
@@ -93,8 +93,8 @@ class Server {
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
-            log_service_1.default.log((`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
-            log_service_1.default.log(`Press CTRL-C to stop`);
+            log_1.default.log((`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
+            log_1.default.log(`Press CTRL-C to stop`);
         });
     }
 }

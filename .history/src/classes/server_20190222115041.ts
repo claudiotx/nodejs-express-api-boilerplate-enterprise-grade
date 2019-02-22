@@ -5,7 +5,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-import logService from '../services/log';
+import logService from '../services/log-service';
 
 class Server {
   protected app: express.Application;
