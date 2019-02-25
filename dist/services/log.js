@@ -1,22 +1,15 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const os = __importStar(require("os"));
+const os_1 = __importDefault(require("os"));
 const moment_1 = __importDefault(require("moment"));
 // import * as LogEntries from 'r7insight_node';
-const winston = __importStar(require("winston"));
-const uuid = __importStar(require("uuid"));
+const winston_1 = __importDefault(require("winston"));
+const uuid_1 = __importDefault(require("uuid"));
 // https://www.npmjs.com/package/winston
-const hostName = os.hostname();
+const hostName = os_1.default.hostname();
 const customLevels = {
     levels: {
         emerg: 0,
@@ -53,28 +46,28 @@ class LogService {
         // this.logEntries.on('error', (err: any) => {
         //   console.log('something went wrong with remote logs via logentries', err);
         // });
-        this.correlationId = uuid.v1();
+        this.correlationId = uuid_1.default.v1();
         // Local logs
-        this.localLogEntries = winston.createLogger({
+        this.localLogs = winston_1.default.createLogger({
             level: process.env.LOG_LEVEL || 'info',
             levels: customLevels.levels,
-            format: winston.format.combine(winston.format.timestamp(), winston.format.colorize(), winston.format.prettyPrint()),
+            format: winston_1.default.format.combine(winston_1.default.format.timestamp(), winston_1.default.format.colorize(), winston_1.default.format.prettyPrint()),
             transports: [
-                new winston.transports.Console({
-                    format: winston.format.simple()
+                new winston_1.default.transports.Console({
+                    format: winston_1.default.format.simple()
                 })
             ]
         });
-        winston.addColors(customLevels.colors);
+        winston_1.default.addColors(customLevels.colors);
     }
     log(level = 'info', message = 'Log', obj = {}) {
         if (Object.keys(obj).length > 0) {
-            // this.localLogEntries.log({level, message, obj});
-            this.sendToLogEntries(level, message, obj);
+            this.localLogs.log({ level, message, obj });
+            // this.sendToLogEntries(level, message, obj);
         }
         else {
-            // this.localLogEntries.log({level, message});
-            this.sendToLogEntries(level, message);
+            this.localLogs.log({ level, message });
+            // this.sendToLogEntries(level, message);
         }
     }
     sendToLogEntries(level, message, obj) {

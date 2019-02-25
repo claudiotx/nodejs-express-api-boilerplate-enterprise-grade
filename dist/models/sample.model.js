@@ -8,7 +8,6 @@ const update_plugin_1 = __importDefault(require("./update-plugin"));
 const { ObjectId } = mongoose_1.Schema.Types;
 const SampleSchema = new mongoose_1.Schema({
     identifier: {
-        index: true,
         type: String
     },
     description: {

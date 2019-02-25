@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { RouteHandler, Get, Post, Put, Delete } from '../decorators/route-handler';
-import logService from '../services/log-service';
+import logService from '../services/log';
 import Server from '../classes/server';
 import * as moment from 'moment';
 import * as os from 'os';
@@ -13,7 +13,7 @@ class LivenessProbeRoute {
 
   @Get('*')
   public broadcastStats(request: Request, response: Response): Response {
-    logService.log('broacasting');
+    logService.log(`debug`, 'broacasting');
     const stats = this.getBasicStats();
     return response.json(stats);
   }

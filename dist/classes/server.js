@@ -34,14 +34,14 @@ class Server {
                 const whitelist = [
                     'kube-probe/1.10'
                 ];
-                log_1.default.log(`Origin check ${origin}`);
+                log_1.default.log('debug', `debug`, `Origin check ${origin}`);
                 if (whitelist.indexOf(origin) === -1) {
                     callback(undefined, true);
                 }
                 else {
                     callback(undefined, true);
-                    log_1.default.log(`Not allowed by CORS ${origin}`);
-                    log_1.default.log(`Not allowed by CORS ${origin}`);
+                    log_1.default.log('debug', `Not allowed by CORS ${origin}`);
+                    log_1.default.log('debug', `Not allowed by CORS ${origin}`);
                     // callback(new Error(`Not allowed by CORS ${origin}`));
                 }
             },
@@ -61,7 +61,7 @@ class Server {
     }
     safeTermination() {
         mongoose_1.default.disconnect().then(() => {
-            log_1.default.log('MongoDB safely shutting down interface...');
+            log_1.default.log('debug', 'MongoDB safely shutting down interface...');
             process.exit(1);
         });
     }
@@ -80,21 +80,23 @@ class Server {
             this.safeTermination();
         });
         const connectionOpts = {};
-        this.db = mongoose_1.default.createConnection(process.env.MONGODB_URI, connectionOpts);
+        this.db = mongoose_1.default.connection;
         this.db.once('open', () => {
-            log_1.default.log('Database connection is open.');
+            log_1.default.log('debug', 'Database connection is open.');
         });
         this.db.on('error', (err) => {
-            log_1.default.log('Database connection error.', err);
+            log_1.default.log('debug', 'Database connection error.', err);
             if (err)
                 throw err;
             process.exit(1);
         });
+        // Atomic DB Connection
+        mongoose_1.default.connect(process.env.MONGODB_URI, connectionOpts);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
-            log_1.default.log((`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
-            log_1.default.log(`Press CTRL-C to stop`);
+            log_1.default.log('debug', (`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
+            log_1.default.log('debug', `Press CTRL-C to stop`);
         });
     }
 }

@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+
 import Server from './classes/server';
 import IndexRoute from './routes/index.route';
 import LivenessProbeRoute from './routes/liveness-probe.route';
@@ -22,7 +23,6 @@ const apiRoute = new ApiRoute(app);
 const livenessProbeRoute = new LivenessProbeRoute(app);
 const index = new IndexRoute(app.getRoutes());
 app.addRoute('/', index.router);
-
 
 // EntryPoint
 app.start();

@@ -5,7 +5,6 @@ const { ObjectId } = Schema.Types;
 
 const SampleSchema: Schema = new Schema({
   identifier: {
-    index: true,
     type: String
   },
   description: {

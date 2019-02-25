@@ -37,13 +37,13 @@ class Server {
         const whitelist = [
           'kube-probe/1.10'
         ];
-        logService.log(`Origin check ${origin}`);
+        logService.log('debug', `debug`, `Origin check ${origin}`);
         if (whitelist.indexOf(origin) === -1) {
           callback(undefined, true);
         } else {
           callback(undefined, true);
-          logService.log(`Not allowed by CORS ${origin}`);
-          logService.log(`Not allowed by CORS ${origin}`);
+          logService.log('debug', `Not allowed by CORS ${origin}`);
+          logService.log('debug', `Not allowed by CORS ${origin}`);
           // callback(new Error(`Not allowed by CORS ${origin}`));
         }
       },
@@ -65,7 +65,7 @@ class Server {
 
   private safeTermination() {
     mongoose.disconnect().then(() => {
-      logService.log('MongoDB safely shutting down interface...');
+      logService.log('debug', 'MongoDB safely shutting down interface...');
       process.exit(1);
     });
   }
@@ -88,23 +88,23 @@ class Server {
     });
 
     const connectionOpts = {};
-    this.db = mongoose.createConnection(process.env.MONGODB_URI, connectionOpts);
-
+    this.db = mongoose.connection;
     this.db.once('open', () => {
-      logService.log('Database connection is open.');
+      logService.log('debug', 'Database connection is open.');
     });
-
     this.db.on('error', (err) => {
-      logService.log('Database connection error.', err);
+      logService.log('debug', 'Database connection error.', err);
       if (err) throw err;
       process.exit(1);
     });
+    // Atomic DB Connection
+    mongoose.connect(process.env.MONGODB_URI, connectionOpts);
   }
 
   public start(): void {
     this.app.listen(this.app.get('port'), () => {
-      logService.log((`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
-      logService.log(`Press CTRL-C to stop`);
+      logService.log('debug', (`App is running at http://localhost:${this.app.get('port')} in ${this.app.get('env')} mode')`));
+      logService.log('debug', `Press CTRL-C to stop`);
     });
   }
 }

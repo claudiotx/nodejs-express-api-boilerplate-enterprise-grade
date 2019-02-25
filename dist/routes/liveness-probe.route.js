@@ -17,7 +17,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const route_handler_1 = require("../decorators/route-handler");
-const log_service_1 = __importDefault(require("../services/log-service"));
+const log_1 = __importDefault(require("../services/log"));
 const moment = __importStar(require("moment"));
 const os = __importStar(require("os"));
 let LivenessProbeRoute = class LivenessProbeRoute {
@@ -25,7 +25,7 @@ let LivenessProbeRoute = class LivenessProbeRoute {
         this.app = app;
     }
     broadcastStats(request, response) {
-        log_service_1.default.log('broacasting');
+        log_1.default.log(`debug`, 'broacasting');
         const stats = this.getBasicStats();
         return response.json(stats);
     }

@@ -1,8 +1,8 @@
-import * as os from 'os';
+import os from 'os';
 import moment from 'moment';
 // import * as LogEntries from 'r7insight_node';
-import * as winston from 'winston';
-import * as uuid from 'uuid';
+import winston from 'winston';
+import uuid from 'uuid';
 
 // https://www.npmjs.com/package/winston
 
@@ -32,7 +32,7 @@ const customLevels = {
 
 class LogService {
   private logEntries: any;
-  private localLogEntries: any;
+  private localLogs: any;
   private correlationId: string = uuid.v1();
 
   constructor() {
@@ -50,7 +50,7 @@ class LogService {
     // });
 
     // Local logs
-    this.localLogEntries = winston.createLogger({
+    this.localLogs = winston.createLogger({
       level: process.env.LOG_LEVEL || 'info',
       levels: customLevels.levels,
       format: winston.format.combine(
@@ -69,11 +69,11 @@ class LogService {
 
   public log(level = 'info', message = 'Log', obj = {}): void {
     if (Object.keys(obj).length > 0) {
-      // this.localLogEntries.log({level, message, obj});
-      this.sendToLogEntries(level, message, obj);
+      this.localLogs.log({level, message, obj});
+      // this.sendToLogEntries(level, message, obj);
     } else {
-      // this.localLogEntries.log({level, message});
-      this.sendToLogEntries(level, message);
+      this.localLogs.log({level, message});
+      // this.sendToLogEntries(level, message);
     }
   }
 

@@ -1,10 +1,3 @@
-import chalk from 'chalk';
-import * as os from 'os';
-import * as moment from 'moment';
-
-const log = console.log;
-const logError = console.error;
-const hostName = os.hostname();
 class TimingService {
   public start(): [number, number] {
     return process.hrtime();

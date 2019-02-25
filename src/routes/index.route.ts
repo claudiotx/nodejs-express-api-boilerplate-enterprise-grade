@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import logService from '../services/log-service';
+import logService from '../services/log';
 class IndexRoute {
   public router: Router;
 
@@ -12,13 +12,13 @@ class IndexRoute {
     this.router.route('').get((request: Request, response: Response) => {
       const meta: any = [];
       const fullUrl = request.protocol + '://' + request.get('host');
-      this.applicationRoutes.forEach((resourse: string) => {
-        // logService.log(`Setting route... ${resourse}`);
-        if (resourse !== '/') {
+      this.applicationRoutes.forEach((resource: string) => {
+        logService.log(`debug`, `Setting route... ${resource}`);
+        if (resource !== '/') {
           meta.push(
             {
-              rel: resourse.replace(/\//g, ''),
-              href: fullUrl + resourse
+              rel: resource.replace(/\//g, ''),
+              href: fullUrl + resource
             }
           );
         }

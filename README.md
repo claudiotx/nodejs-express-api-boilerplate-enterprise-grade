@@ -1,8 +1,16 @@
 # Enterprise Grade Node.js Boilerplate
-The main purpose of this repository is to provide a solid boilerplate base project to startups that which to have a quality and solid API backend in Node.js (without views).
-It assumes an explicit separation between frontend and backend.
-I try my best to keep the repository uo to date.
+The main purpose of this repository is to provide a solid boilerplate base project to startups that want to have a quality and solid API backend in Node.js (without views).
+This boilerplate assumes an explicit separation between frontend and backend.
+I try my best to keep the repository up to date.
 Community contributions are most welcome.
+
+## TLDR;
+- Do NOT store sensitive information in your `env` Folder! Use environment variables on the host, process manager or container which is running your app.
+- Do not bypass TypeScript Lint
+- Do not use plain JS files
+- Do not use `any` for type assignment
+- Dev: npm run watch
+- Deploy: npm run build
 
 ## Main Features
 * TypeScript
