@@ -1,13 +1,13 @@
-import * as supertest from 'supertest';
-const request = supertest('localhost:3600');
+import supertest from 'supertest';
+const request = supertest('localhost:7777');
+// https://jestjs.io/
 
 beforeEach(async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
-    }, 3000);
+    }, 1000);
   });
-
 });
 
 

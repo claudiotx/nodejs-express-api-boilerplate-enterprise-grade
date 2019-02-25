@@ -12,6 +12,9 @@ const SampleSchema = new mongoose_1.Schema({
     },
     description: {
         type: String
+    },
+    order: {
+        type: Number
     }
 });
 SampleSchema.plugin(update_plugin_1.default);

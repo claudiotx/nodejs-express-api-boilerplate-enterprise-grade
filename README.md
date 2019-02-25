@@ -1,16 +1,20 @@
 # Enterprise Grade Node.js Boilerplate
 The main purpose of this repository is to provide a solid boilerplate base project to startups that want to have a quality and solid API backend in Node.js (without views).
+This project is biased on my vision of how an enterprise grade app should be, it may not be aligned with yours.
 This boilerplate assumes an explicit separation between frontend and backend.
 I try my best to keep the repository up to date.
-Community contributions are most welcome.
+Community contributions are most welcome. (Open an Issue or fork/clone and PR against #master)
+Powered by: coderecipes.org
 
-## TLDR;
+## TLDR; DO NOT SKIP THIS!
+- Dev: `npm run watch`
+- Deploy: `npm run build`
+- Tests: `npm run test`
+- Do NOT bypass TypeScript Lint;
+- Do NOT use plain JS files;
+- Avoid using `any` for type assignment;
+- Write E2E and Unit Tests in TS
 - Do NOT store sensitive information in your `env` Folder! Use environment variables on the host, process manager or container which is running your app.
-- Do not bypass TypeScript Lint
-- Do not use plain JS files
-- Do not use `any` for type assignment
-- Dev: npm run watch
-- Deploy: npm run build
 
 ## Main Features
 * TypeScript
@@ -97,6 +101,8 @@ Now just set your breakpoints and go!
 
 ## Testing
 For this project, I chose [Jest](https://facebook.github.io/jest/) as our test framework.
+If you want to use a TDD/BDD approach, please create your `test.ts` files in `/test/unit` and force them to fail, then implement the correct logic to make the tests pass.
+If you want to run only unit tests: `npm run test-unit`
 
 ### Running tests
 Simply run `npm run test`.

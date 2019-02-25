@@ -17,7 +17,7 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "start-pm2": "./scripts/launch-with-pm2.sh",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
+    "watch": "NODE_ENV=development LOG_LEVEL=debug concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\" \"npm run test-unit\" ",
     "serve": "nodemon ./dist/app.js",
     "serve-debug": "node debug ./dist/app.js",
     "dev": "npm run build && npm run watch",
@@ -25,9 +25,12 @@
     "build-ts": "tsc",
     "build": "tsc -v && npm run build-ts && npm run tslint",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "jest --forceExit",
+    "test": "jest -c .jest.config.js  --forceExit --coverage --notify --watchAll",
+    "test-unit": "jest -c .jest.config.unit.js --coverage --notify --watch",
     "docs": "tsoa swagger",
-    "prepush": "tsc -v && npm run tslint"
+    "prepush": "tsc -v && npm run tslint",
+    "prestart": "node bin/prestart",
+    "prewatch": "node bin/prestart"
   },
   "config": {
     "port": "7777"

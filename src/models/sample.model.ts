@@ -9,6 +9,9 @@ const SampleSchema: Schema = new Schema({
   },
   description: {
     type: String
+  },
+  order: {
+    type: Number
   }
 });
 
