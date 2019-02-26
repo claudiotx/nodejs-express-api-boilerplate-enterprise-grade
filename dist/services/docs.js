@@ -27,7 +27,6 @@ const log_1 = __importDefault(require("../services/log"));
 let DocsService = class DocsService {
     getDocs(from, to) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('getting docs service');
             return sample_model_1.SampleModel.find();
         });
     }
@@ -37,7 +36,8 @@ let DocsService = class DocsService {
     }
     createDoc(requestBody) {
         log_1.default.log(`info`, `createDoc POST`, requestBody);
-        return Promise.resolve(true);
+        const doc = new sample_model_1.SampleModel(requestBody);
+        return Promise.reject('oops');
     }
     updateDoc(requestBody) {
         log_1.default.log(`info`, `updateDoc POST`, requestBody);
@@ -54,7 +54,11 @@ __decorate([
     tsoa_1.Post(),
     validate_1.Validate([
         {
-            param: 'docId',
+            param: 'identifier',
+            validate: 'required'
+        },
+        {
+            param: 'description',
             validate: 'required'
         }
     ]),

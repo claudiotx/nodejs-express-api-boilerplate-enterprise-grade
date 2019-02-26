@@ -1,6 +1,8 @@
 import { Request, Response, Router } from 'express';
 import moment from 'moment';
+
 import { RouteHandler, Get, Post, Put, Delete } from '../decorators/route-handler';
+import { Validate } from '../decorators/validate';
 import DocsService from '../services/docs';
 import Server from '../classes/server';
 import SampleDoc from '../models/sample.doc';
@@ -46,14 +48,12 @@ class ApiRoute {
   }
 
   @Post('/docs/')
-  public createDoc(request: Request, response: Response): void {
+  public createDoc(request: Request, response: Response, next: any): void {
     this.docsService.createDoc(request.body)
-      .then((newDoc: any) => {
+      .then((newDoc: SampleDoc) => {
         return response.json(newDoc);
       })
-      .catch((error: Error) => {
-        throw error;
-      });
+      // Error handling on the upper level
   }
 
   @Put('/docs/:id')

@@ -8,10 +8,14 @@ const update_plugin_1 = __importDefault(require("./update-plugin"));
 const { ObjectId } = mongoose_1.Schema.Types;
 const SampleSchema = new mongoose_1.Schema({
     identifier: {
-        type: String
+        type: String,
+        required: true,
+        unique: true,
+        index: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     order: {
         type: Number

@@ -10,6 +10,15 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const log_1 = __importDefault(require("../services/log"));
+const errorHandler = (err, req, res, next) => {
+    log_1.default.log(`error`, `Bubbled up error`, err.message);
+    if (res.headersSent) {
+        return next(err);
+    }
+    res.status(500);
+    // Do not send stack traces or expose code to the client
+    res.send({ error: err.message || 'Something went wrong' });
+};
 class Server {
     constructor(port = 4400) {
         this.routes = [];
@@ -74,6 +83,9 @@ class Server {
     }
     getRoutes() {
         return this.routes;
+    }
+    addErrorHandler() {
+        this.app.use(errorHandler);
     }
     initialize() {
         process.once('SIGINT', () => {

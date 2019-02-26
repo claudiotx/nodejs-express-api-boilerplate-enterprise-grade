@@ -5,10 +5,14 @@ const { ObjectId } = Schema.Types;
 
 const SampleSchema: Schema = new Schema({
   identifier: {
-    type: String
+    type: String,
+    required: true,
+    unique: true,
+    index: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   order: {
     type: Number

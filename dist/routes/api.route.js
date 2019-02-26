@@ -44,14 +44,12 @@ class ApiRoute {
             throw error;
         });
     }
-    createDoc(request, response) {
+    createDoc(request, response, next) {
         this.docsService.createDoc(request.body)
             .then((newDoc) => {
             return response.json(newDoc);
-        })
-            .catch((error) => {
-            throw error;
         });
+        // Error handling on the upper level
     }
     updateDoc(request, response) {
         this.docsService.updateDoc(request.body)

@@ -15,7 +15,6 @@ import logService from '../services/log';
 class DocsService {
   @Get()
   public async getDocs(from?: moment.Moment, to?: moment.Moment): Promise<Doc[]> {
-    console.log('getting docs service')
     return SampleModel.find();
   }
 
@@ -28,13 +27,18 @@ class DocsService {
   @Post()
   @Validate([
     {
-      param: 'docId',
+      param: 'identifier',
+      validate: 'required'
+    },
+    {
+      param: 'description',
       validate: 'required'
     }
   ])
   public createDoc(@Body() requestBody: any): Promise<any> {
     logService.log(`info`, `createDoc POST`, requestBody);
-    return Promise.resolve(true);
+    const doc = new SampleModel(requestBody)
+    return Promise.reject('oops');
   }
 
   @Put('{id}')

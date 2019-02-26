@@ -7,6 +7,16 @@ import mongoose from 'mongoose';
 
 import logService from '../services/log';
 
+const errorHandler = (err: any, req: any, res: any, next: any) => {
+  logService.log(`error`, `Bubbled up error`, err.message);
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  // Do not send stack traces or expose code to the client
+  res.send({ error: err.message || 'Something went wrong' });
+};
+
 class Server {
   protected app: express.Application;
   protected httpServer: http.Server;
@@ -80,6 +90,10 @@ class Server {
 
   public getRoutes(): string[] {
     return this.routes;
+  }
+
+  public addErrorHandler() {
+    this.app.use(errorHandler);
   }
 
   public initialize(): void {

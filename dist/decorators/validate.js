@@ -24,7 +24,7 @@ function Validate(params) {
                 }
             });
             if (errors.length) {
-                return Promise.reject(errors);
+                throw new Error(`Invalid parameters ${JSON.stringify(errors)}`);
             }
             else {
                 return originalMethod.apply(this, arguments);

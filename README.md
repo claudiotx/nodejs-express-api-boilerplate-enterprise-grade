@@ -14,7 +14,7 @@ Powered by: coderecipes.org
 - Do NOT use plain JS files;
 - Avoid using `any` for type assignment;
 - Write E2E and Unit Tests in TS
-- Do NOT store sensitive information in your `env` Folder! Use environment variables on the host, process manager or container which is running your app.
+- Do NOT store sensitive information in your `env` Folder! Use environment variables on the host, process manager or container which is running your app. If you do need to store sensitive info there, please do not track that file.
 
 ## Main Features
 * TypeScript
@@ -31,6 +31,7 @@ Powered by: coderecipes.org
 * API Automated Swager Documentation via TSOA (relies on TypeScript type annotations to generate API metadata)
 * TSLint Enabled
 * Safe Await Async Protection
+* StackTrace Leak Client Protection
 
 ## Getting started
 The build orchestration is managed by npm scripts, so there is no need for gulp or grunt orchestrators.

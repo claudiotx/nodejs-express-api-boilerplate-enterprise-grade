@@ -23,6 +23,8 @@ const apiRoute = new ApiRoute(app);
 const livenessProbeRoute = new LivenessProbeRoute(app);
 const index = new IndexRoute(app.getRoutes());
 app.addRoute('/', index.router);
+app.addErrorHandler();
+
 
 // EntryPoint
 app.start();

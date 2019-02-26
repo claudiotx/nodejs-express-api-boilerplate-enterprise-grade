@@ -34,6 +34,7 @@ const apiRoute = new api_route_1.default(app);
 const livenessProbeRoute = new liveness_probe_route_1.default(app);
 const index = new index_route_1.default(app.getRoutes());
 app.addRoute('/', index.router);
+app.addErrorHandler();
 // EntryPoint
 app.start();
 //# sourceMappingURL=app.js.map
