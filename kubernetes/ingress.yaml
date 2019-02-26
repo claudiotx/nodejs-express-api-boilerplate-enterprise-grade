@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nodejs-api-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+      - api.coderecipes.org
+      secretName: code-recipes-certificate-2018
+  rules:
+  - host: api.coderecipes.org
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: nodejs-api-svc
+          servicePort: 7777

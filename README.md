@@ -32,6 +32,7 @@ Powered by: coderecipes.org
 * TSLint Enabled
 * Safe Await Async Protection
 * StackTrace Leak Client Protection
+* Kubernetes Tooling Ready
 
 ## Getting started
 The build orchestration is managed by npm scripts, so there is no need for gulp or grunt orchestrators.
@@ -108,3 +109,8 @@ If you want to run only unit tests: `npm run test-unit`
 ### Running tests
 Simply run `npm run test`.
 Note this will also generate a coverage report.
+
+## Deploying via Kubernetes
+Please check `./kubernetes/*` for bash scripts and yaml templates.
+The templates assume that your K8s cluster is using an NGiNX based Ingress Router to enable inbound connections to the cluster, allowing external traffic to reach the correct Pod.
+Please note that the Ingress will enable externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting for the Kubernetes cluster.
