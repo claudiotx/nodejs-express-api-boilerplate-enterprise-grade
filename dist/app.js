@@ -12,9 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 const server_1 = __importDefault(require("./classes/server"));
-const index_route_1 = __importDefault(require("./routes/index.route"));
+const index_route_1 = __importDefault(require("./routes/v1/index.route"));
 const liveness_probe_route_1 = __importDefault(require("./routes/liveness-probe.route"));
-const api_route_1 = __importDefault(require("./routes/api.route"));
+const api_route_1 = __importDefault(require("./routes/v1/api.route"));
 if (!process.env.NODE_ENV) {
     dotenv.config({ path: './env/.env.development' });
 }

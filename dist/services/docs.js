@@ -37,11 +37,22 @@ let DocsService = class DocsService {
     createDoc(requestBody) {
         log_1.default.log(`info`, `createDoc POST`, requestBody);
         const doc = new sample_model_1.SampleModel(requestBody);
-        return Promise.reject('oops');
+        return doc.save();
     }
-    updateDoc(requestBody) {
-        log_1.default.log(`info`, `updateDoc POST`, requestBody);
-        return Promise.resolve(true);
+    updateDoc(id, requestBody) {
+        log_1.default.log(`info`, `updateDoc POST`, { id, requestBody });
+        const options = {
+            new: true,
+            safe: true,
+            upsert: true,
+            multi: false,
+            strict: false
+        };
+        return sample_model_1.SampleModel.findByIdAndUpdate(id, requestBody, options);
+    }
+    deleteDoc(id, requestBody) {
+        log_1.default.log(`info`, `deleteDoc DELETE`, { id, requestBody });
+        return sample_model_1.SampleModel.findByIdAndDelete(id);
     }
 };
 __decorate([
@@ -68,12 +79,24 @@ __decorate([
     tsoa_1.Put('{id}'),
     validate_1.Validate([
         {
-            param: 'docId',
-            validate: 'required'
+            param: 'id',
+            validate: 'required',
+            atomic: true
         }
     ]),
-    __param(0, tsoa_1.Body())
+    __param(0, tsoa_1.Path()), __param(1, tsoa_1.Body())
 ], DocsService.prototype, "updateDoc", null);
+__decorate([
+    tsoa_1.Delete('{id}'),
+    validate_1.Validate([
+        {
+            param: 'id',
+            validate: 'required',
+            atomic: true
+        }
+    ]),
+    __param(0, tsoa_1.Path()), __param(1, tsoa_1.Body())
+], DocsService.prototype, "deleteDoc", null);
 DocsService = __decorate([
     tsoa_1.Route('Docs'),
     tsoa_1.Tags('docs')

@@ -16,6 +16,15 @@ Powered by: coderecipes.org
 - Write E2E and Unit Tests in TS
 - Do NOT store sensitive information in your `env` Folder! Use environment variables on the host, process manager or container which is running your app. If you do need to store sensitive info there, please do not track that file.
 
+## Standards Compliance
+https://www.coderecipes.org/blog/5c69b7e399453f09094d661b
+Find the scripts at: `./quality-control`
+- Signal the load-balancer as quickly as possible that a node server has a long list of lagging requests
+- Flame profilling executed across all Endpoints to flag functions that may be blocking the event-loop
+- Liveness and Healthiness Probes
+- LHealthiness probs running at all times: whilst programming, running Unit Tests, UAT or End 2 End Tests
+- Node Process Manager Enabled (PM2)
+
 ## Main Features
 * TypeScript
 * CORS Middleware

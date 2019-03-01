@@ -45,7 +45,7 @@ function Put(param) {
         const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
         const originalMethod = descriptor.value;
         target._routes = target._routes || [];
-        target._routes.push({ url: param, method: 'post', handler: originalMethod });
+        target._routes.push({ url: param, method: 'put', handler: originalMethod });
         return descriptor;
     };
 }
@@ -56,7 +56,7 @@ function Delete(param) {
         const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
         const originalMethod = descriptor.value;
         target._routes = target._routes || [];
-        target._routes.push({ url: param, method: 'post', handler: originalMethod });
+        target._routes.push({ url: param, method: 'delete', handler: originalMethod });
         return descriptor;
     };
 }

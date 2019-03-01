@@ -4,8 +4,11 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import toobusy from 'toobusy-js';
+import { Request, Response, NextFunction } from 'express';
 
 import logService from '../services/log';
+
 
 const errorHandler = (err: any, req: any, res: any, next: any) => {
   logService.log(`error`, `Bubbled up error`, err.message);
@@ -70,13 +73,39 @@ class Server {
       res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
       res.send(200);
     });
+
+    // Too Busy Load Checker - which blocks requests when we're too busy
+    Server.configTooBusy();
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      if (toobusy()) {
+        res.status(503).send(`I'm busy right now, sorry.`);
+      } else {
+        next();
+      }
+    });
+
+    // HTTP Server instance
     this.httpServer = http.createServer(this.app);
   }
 
   private safeTermination() {
     mongoose.disconnect().then(() => {
+      toobusy.shutdown();
       logService.log('debug', 'MongoDB safely shutting down interface...');
       process.exit(1);
+    });
+  }
+
+  static configTooBusy() {
+    // Set maximum lag to an aggressive value.
+    toobusy.maxLag(1000);
+    // Set check interval to a faster value. This will catch more latency spikes
+    // but may cause the check to be too sensitive.
+    toobusy.interval(1000);
+    // Get current maxLag or interval setting by calling without parameters.
+    const currentMaxLag = toobusy.maxLag(), interval = toobusy.interval();
+    toobusy.onLag((currentLag) => {
+      console.log(`Event loop lag detected! Latency: ${currentLag}ms`);
     });
   }
 

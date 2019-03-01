@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
 
 import Server from './classes/server';
-import IndexRoute from './routes/index.route';
+import IndexRoute from './routes/v1/index.route';
 import LivenessProbeRoute from './routes/liveness-probe.route';
-import ApiRoute from './routes/api.route';
+import ApiRoute from './routes/v1/api.route';
 
 if (!process.env.NODE_ENV) {
   dotenv.config({ path: './env/.env.development' });

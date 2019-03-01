@@ -17,6 +17,12 @@ export function Validate(params: Array<any>): any {
           break;
           case 'required':
           default:
+            if (currentParam.atomic) {
+              if (!currentParam.param) {
+                errors.push(currentParam);
+              }
+              return;
+            }
             if (!body[currentParam.param]) {
               errors.push(currentParam);
             }
